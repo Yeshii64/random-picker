@@ -2,6 +2,7 @@
 import kotlin.random.Random
 import kotlin.system.exitProcess
 
+
 //TODO fix the top level declaration issue.
 val pickerList = mutableListOf<String>()
 val numpickerlist = mutableListOf<Double>()
@@ -30,10 +31,36 @@ fun menu(){
 
 //coin flip program, heads(0), tails(1)
 fun coinflip(){
- val
+ val coinflip = Random.nextInt(2)
+    println("Flipping a coin..")
+    Thread.sleep(1000)
+    if(coinflip == 1){
+        println("Tails!")
+    }else{
+        println("Heads!")
+    }
+
 }
-//have them input names or numbers in a list and have the program pick one (or more) from it
-fun listpicker(){
+//have them input names or numbers (numpicker) in a list and have the program pick one (or more) from it
+fun namepicker(): MutableList<String>{
+val namelist = mutableListOf<String>()
+var count = 0
+
+println("How many names would you like the computer to choose from?") //so it could be more fun.
+    val nameNum = readlnOrNull()?.toIntOrNull() ?: return namelist
+
+    println("Please enter your names: ")
+    while(count < nameNum){
+        val userInput = readln() ?: ""
+        namelist.add("$userInput")
+        count++
+    }
+    println("Names added succesfully!")
+    return namelist
+    
+}
+
+fun numpicker(){
 
 }
 
