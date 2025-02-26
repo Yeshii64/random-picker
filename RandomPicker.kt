@@ -4,9 +4,9 @@ import kotlin.random.Random
 import kotlin.system.exitProcess
 
 
-//TODO fix the top level declaration issue.
+
 val pickerList = mutableListOf<String>()
-val numpickerlist = mutableListOf<Double>()
+val numpickerlist = mutableListOf<Int>()
 
 fun main(){
     while (true){
@@ -19,16 +19,20 @@ fun menu(){
     println("1. Coin Flip")
     println("2. Name picker")
     println("3. View (RandomName)")
-    println("4. Random Number Generator")
-    println("5. Exit")
+    println("4. Number Picker")
+    println("5. View (random Numbers)")
+    println("6. Random Number Generator")
+    println("7. Exit")
     println("Select a number: ")
 
     when(readlnOrNull()?.toIntOrNull()){
         1 -> coinflip()
         2 -> pickerList.addAll(namepicker())
         3 -> viewnames(pickerList)
-        4 -> randNumGen()
-        5 -> exit()
+        4 -> numpickerlist.addAll(numpicker())
+        5 -> viewNumbers(numpickerlist)
+        6 -> randNumGen()
+        7 -> exit()
         else -> println("Invalid input")
     }
 }
@@ -56,7 +60,7 @@ println("How many names would you like the computer to choose from?") //so it co
     println("Please enter your names: ")
     while(count < nameNum){
         val userInput = readln() ?: ""
-        namelist.add("$userInput")
+        namelist.add(userInput)
         count++
     }
     println("Names added succesfully! (Select viewnames to see the randomly picked name)")
@@ -68,17 +72,41 @@ fun viewnames(namelist: MutableList<String>){ //had to create another function t
     println(randomname)
 }
 
-fun numpicker(): MutableList<Double>{
-    val numlist = mutableListOf<Double>()
+fun numpicker(): MutableList<Int>{
+    val numlist = mutableListOf<Int>()
     var count1 = 0
 
-    println("How many numbers would you like the computer to choose from?"))
+    println("How many numbers would you like the computer to choose from?")
+    val numNum = readlnOrNull()?.toIntOrNull() ?: return numlist
+
+    println("Please enter your numbers: ")
+    while (count1 < numNum){
+        val userInput1 = readlnOrNull()?.toIntOrNull() ?: ""
+        numlist.add(userInput1 as Int)
+        count1++
+    }
+    println("Numbers successfully added! (Select viewnumbers to see the randomly picked number)")
+    return numlist
 }
+
+fun viewNumbers(numlist: MutableList<Int>){
+    val randomNums = numlist.random()
+    println(randomNums)
+}
+
+
 
 
 //maybe i can ask the user to input how many numbers they want to be generated.
 fun randNumGen(){
-
+    println("Welcome to the random number generator! How many numbers do you want the generator to generate?: ")
+    val ranNums = readlnOrNull()?.toIntOrNull()
+    println("Awesome! Generating the numbers now...")
+    Thread.sleep(1000) // i once heard that people are more satisfied with waiting for at least a little bit.
+    for (i in 1..ranNums!!){
+        print("${Random.nextInt(1,10)}")
+    }
+    println()
 }
 
 //exiting the code
