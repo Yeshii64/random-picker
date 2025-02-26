@@ -1,4 +1,5 @@
 //This program is to help anybody pick something if they need help.  //Two modes - coin flip, and picking from a list to choose names or something.
+import org.w3c.dom.NameList
 import kotlin.random.Random
 import kotlin.system.exitProcess
 
@@ -17,14 +18,17 @@ fun menu(){
     println("Welcome to Yeshua's helper!")
     println("1. Coin Flip")
     println("2. Name picker")
-    println("3. Random Number Generator")
-    println("4. Exit")
+    println("3. View (RandomName)")
+    println("4. Random Number Generator")
+    println("5. Exit")
+    println("Select a number: ")
 
     when(readlnOrNull()?.toIntOrNull()){
         1 -> coinflip()
-        2 -> listpicker()
-        3 -> randNumGen()
-        4 -> exit()
+        2 -> pickerList.addAll(namepicker())
+        3 -> viewnames(pickerList)
+        4 -> randNumGen()
+        5 -> exit()
         else -> println("Invalid input")
     }
 }
@@ -55,13 +59,20 @@ println("How many names would you like the computer to choose from?") //so it co
         namelist.add("$userInput")
         count++
     }
-    println("Names added succesfully!")
+    println("Names added succesfully! (Select viewnames to see the randomly picked name)")
     return namelist
-    
 }
 
-fun numpicker(){
+fun viewnames(namelist: MutableList<String>){ //had to create another function to print it cause i have no idea how to print it from the original one.
+    val randomname = namelist.random()
+    println(randomname)
+}
 
+fun numpicker(): MutableList<Double>{
+    val numlist = mutableListOf<Double>()
+    var count1 = 0
+
+    println("How many numbers would you like the computer to choose from?"))
 }
 
 
